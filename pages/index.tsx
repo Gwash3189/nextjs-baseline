@@ -1,13 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
 import useSWR from 'swr'
+import { Health } from '@prisma/client'
 const fetcher = (url: string, opts = {}) => fetch(url, opts).then((res) => res.ok ? res.json() : Promise.reject(res))
 
 export default function Home () {
-  const { data, error } = useSWR('/api/health', fetcher)
-
-  const successTextColor = data?.health ? 'text-green-600' : null
-  const errorTextColor = error ? 'text-red-600' : null
+  const { data } = useSWR<Health[]>('/api/services', fetcher)
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -21,14 +19,19 @@ export default function Home () {
           Fullstack NextJS with nextjs-backend-helpers
         </h1>
 
-        <p className="mt-3 text-2xl">
-          Database Check
-        </p>
-        <p className="mt-3 text-2xl">
-          <code className={'p-3 font-mono text-lg bg-gray-100 rounded-md ' + (successTextColor || errorTextColor)}>
-            Am I Healthy? { data?.health?.toggle ? 'Yes I am.' : 'No I am Not.'}
-          </code>
-        </p>
+        <h2 className="mt-3 text-2xl">
+          Services
+        </h2>
+        {data?.map(service => {
+          const textColor = service.toggle ? ' text-green-600' : ' text-red-600'
+
+          return (
+            <p key={service.id} className={'mt-3 text-2xl' + textColor}>
+              <a href={service.url}>{service.serviceName}</a>
+            </p>
+          )
+        })}
+
       </main>
     </div>
   )
