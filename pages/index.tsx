@@ -27,17 +27,34 @@ export default function Home () {
         <h2 className="mt-3 text-2xl">
           Services
         </h2>
-        {data?.map(service => {
-          const textColor = service.toggle ? ' text-green-600' : ' text-red-600'
 
-          return (
-            <p key={service.id} className={'mt-3 text-2xl' + textColor}>
-              <a href={service.url}>{service.serviceName}</a>
-            </p>
-          )
-        })}
+        {data ? <ServiceList services={data}/> : <LoadingMessage/>}
 
       </main>
     </div>
+  )
+}
+
+function ServiceList({ services }: { services: Health[] }) {
+  return (
+    <div>
+      {services.map(service => {
+    const textColor = service.toggle ? ' text-green-600' : ' text-red-600'
+
+    return (
+      <p key={service.id} className={'mt-3 text-2xl' + textColor}>
+        <a href={service.url}>{service.serviceName}</a>
+      </p>
+    )
+  })}
+    </div>
+  )
+}
+
+function LoadingMessage() {
+  return (
+  <div className="animate-pulse flex space-x-4">
+    <p className='inline text-zinc-500'>Loading</p>
+  </div>
   )
 }
