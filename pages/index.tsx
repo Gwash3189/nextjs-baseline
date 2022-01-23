@@ -4,6 +4,30 @@ import useSWR from 'swr'
 import { Health } from '@prisma/client'
 const fetcher = (url: string, opts = {}) => fetch(url, opts).then((res) => res.ok ? res.json() : Promise.reject(res))
 
+function ServiceList ({ services }: { services: Health[] }) {
+  return (
+    <div>
+      {services.map(service => {
+        const textColor = service.toggle ? ' text-green-600' : ' text-red-600'
+
+        return (
+          <p key={service.id} className={'mt-3 text-2xl' + textColor}>
+            <a href={service.url}>{service.serviceName}</a>
+          </p>
+        )
+      })}
+    </div>
+  )
+}
+
+function LoadingMessage () {
+  return (
+    <div className="animate-pulse flex space-x-4">
+      <p className='inline text-zinc-500'>Loading</p>
+    </div>
+  )
+}
+
 export default function Home () {
   const { data } = useSWR<Health[]>('/api/services', fetcher)
 
@@ -32,29 +56,5 @@ export default function Home () {
 
       </main>
     </div>
-  )
-}
-
-function ServiceList({ services }: { services: Health[] }) {
-  return (
-    <div>
-      {services.map(service => {
-    const textColor = service.toggle ? ' text-green-600' : ' text-red-600'
-
-    return (
-      <p key={service.id} className={'mt-3 text-2xl' + textColor}>
-        <a href={service.url}>{service.serviceName}</a>
-      </p>
-    )
-  })}
-    </div>
-  )
-}
-
-function LoadingMessage() {
-  return (
-  <div className="animate-pulse flex space-x-4">
-    <p className='inline text-zinc-500'>Loading</p>
-  </div>
   )
 }
