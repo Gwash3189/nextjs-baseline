@@ -7,7 +7,7 @@ export function get (healthRespository = new HealthRespository()) {
     let health: Array<Health | null> = await healthRespository.all()
 
     if (health === null) {
-      let item = await healthRespository.create({ toggle: true, serviceName: 'Health Service', url: 'localhost:5555'})
+      const item = await healthRespository.create({ toggle: true, serviceName: 'Health Service', url: 'localhost:5555' })
       health = [item]
     }
 

@@ -5,9 +5,7 @@ import { Health } from '@prisma/client'
 const fetcher = (url: string, opts = {}) => fetch(url, opts).then((res) => res.ok ? res.json() : Promise.reject(res))
 
 export default function Home () {
-  const { data, error } = useSWR<Health[]>('/api/services', fetcher)
-
-  
+  const { data } = useSWR<Health[]>('/api/services', fetcher)
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -28,12 +26,12 @@ export default function Home () {
           const textColor = service.toggle ? ' text-green-600' : ' text-red-600'
 
           return (
-            <p className={"mt-3 text-2xl" + textColor}>
+            <p key={service.id} className={'mt-3 text-2xl' + textColor}>
               <a href={service.url}>{service.serviceName}</a>
             </p>
           )
         })}
-        
+
       </main>
     </div>
   )
