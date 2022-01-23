@@ -13,4 +13,6 @@ generator client {
 model Health {
   id String @id @default(uuid())
   toggle Boolean
+  serviceName String
+  url String @default("")
 }

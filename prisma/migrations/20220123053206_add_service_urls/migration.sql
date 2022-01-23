@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Health" ADD COLUMN     "url" TEXT NOT NULL DEFAULT E'',
+ALTER COLUMN "serviceName" DROP DEFAULT;

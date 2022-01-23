@@ -2,7 +2,9 @@ import { Health, Prisma, PrismaClient } from '.prisma/client'
 import { BaseRespository } from 'repositories/base'
 
 export type CreateHealth = {
-    toggle: boolean
+    toggle: boolean,
+    url: string,
+    serviceName: string
 }
 
 export class HealthRespository extends BaseRespository<Prisma.HealthDelegate<any>, Health> {
@@ -10,11 +12,13 @@ export class HealthRespository extends BaseRespository<Prisma.HealthDelegate<any
     return client.health
   }
 
-  async create ({ toggle }: CreateHealth) {
+  async create ({ toggle, url, serviceName }: CreateHealth) {
     return await this.querySingle(async (author) => {
       return await author.create({
         data: {
-          toggle
+          toggle,
+          serviceName,
+          url
         }
       })
     })
