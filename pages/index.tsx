@@ -45,7 +45,7 @@ export default function Home () {
 
         <div>
           <p className='mt-8'>This service retrieves a list of services, displayed below, and colour-codes their names based upon their health.</p>
-          <p className='mt-2'>We use `useSWR`, so the data is periodically updated and refreshed.</p>
+          <p className='mt-2'>We use useSWR, so the data is periodically updated and refreshed.</p>
         </div>
 
         <h2 className="mt-3 text-2xl">
