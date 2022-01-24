@@ -4,7 +4,7 @@ on:
     branches-ignore:
       - main
 jobs:
-  build:
+  build_lint_test:
     name: Build, lint, and test
       runs-on: ubuntu-latest
       steps:
@@ -29,7 +29,7 @@ jobs:
           run: npm run build
       
   deploy:
-    needs: build
+    needs: build_lint_test
     name: deploy
       runs-on: ubuntu-latest
       steps:
