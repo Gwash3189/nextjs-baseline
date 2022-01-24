@@ -30,9 +30,13 @@ jobs:
       
   deploy:
     name: deploy
-      env: 
-        DIGITAL_OCEAN_ACCESS_TOKEN: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN }}
-        DIGITAL_OCEAN_APP_ID: ${{ secrets.DIGITAL_OCEAN_APP_ID }}
-      uses: digitalocean/doctl@latest
-      run: |
-        doctl auth init -t $DIGITAL_OCEAN_ACCESS_TOKEN && doctl apps create-deployment $DIGITAL_OCEAN_APP_ID
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        env: 
+          DIGITAL_OCEAN_ACCESS_TOKEN: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN }}
+          DIGITAL_OCEAN_APP_ID: ${{ secrets.DIGITAL_OCEAN_APP_ID }}
+        uses: digitalocean/doctl@latest
+        run: |
+          doctl auth init -t $DIGITAL_OCEAN_ACCESS_TOKEN
+          doctl apps create-deployment $DIGITAL_OCEAN_APP_ID
