@@ -1,0 +1,43 @@
+name: CD
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  build_lint_test:
+    name: Build, Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test --ci --coverage --maxWorkers=2
+
+      - name: Build
+        run: npm run build
+      
+  deploy:
+    name: Deploy
+    needs: build_lint_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        env: 
+          DIGITAL_OCEAN_ACCESS_TOKEN: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN }}
+          DIGITAL_OCEAN_APP_ID: ${{ secrets.DIGITAL_OCEAN_APP_ID }}
+        run: |
+          sudo snap install doctl
+          doctl auth init -t $DIGITAL_OCEAN_ACCESS_TOKEN
+          doctl apps create-deployment $DIGITAL_OCEAN_APP_ID
