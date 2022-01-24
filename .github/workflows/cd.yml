@@ -36,7 +36,7 @@ jobs:
         env: 
           DIGITAL_OCEAN_ACCESS_TOKEN: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN }}
           DIGITAL_OCEAN_APP_ID: ${{ secrets.DIGITAL_OCEAN_APP_ID }}
-        uses: digitalocean/doctl@latest
         run: |
+          sudo snap install doctl
           doctl auth init -t $DIGITAL_OCEAN_ACCESS_TOKEN
           doctl apps create-deployment $DIGITAL_OCEAN_APP_ID
