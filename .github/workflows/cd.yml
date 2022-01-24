@@ -29,6 +29,7 @@ jobs:
         run: npm run build
 
   migrations: 
+    needs: build_lint_test
     name: Run pending migrations against the production database
     runs-on: ubuntu-latest
     steps:
