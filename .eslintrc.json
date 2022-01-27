@@ -33,5 +33,8 @@
         "react": {
             "version": "detect"
         }
+    },
+    "globals": {
+        "JSX": true
     }
 }

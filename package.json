@@ -7,14 +7,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint actions/**/*.ts pages/**/*.ts pages/**/*.tsx  repositories/**/*.ts",
+    "lint": "eslint actions/**/*.ts pages/**/*.ts pages/**/*.tsx  repositories/**/*.ts components/**/*.tsx",
     "lint:fix": "npm run lint -- --fix",
     "get:started": "npm install && prisma init",
     "test": "jest tests/*.spec.*",
     "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
-    "@types/jest": "27.0.2",
+    "@headlessui/react": "^1.4.3",
+    "@heroicons/react": "^1.0.5",
+    "@supabase/supabase-js": "^1.29.4",
     "next": "latest",
     "nextjs-backend-helpers": "^2.0.0",
     "react": "^17.0.2",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "17.0.4",
+    "@types/jest": "27.0.2",
     "@types/react": "17.0.38",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
