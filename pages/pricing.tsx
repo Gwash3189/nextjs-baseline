@@ -3,13 +3,14 @@ import { MarketingContainer } from 'components/MarketingContainer'
 import { MarketingHeader } from 'components/MarketingHeader'
 import CTAButton from 'components/buttons/CTAButton'
 import { ArrowRightIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
 
 export default function Pricing () {
     return (
         <MarketingContainer>
           <MarketingHeader active='pricing'/>
           <div className="pb-16 mt-16 space-y-4 flex flex-col lg:space-y-0 lg:flex lg:flex-row items-center justify-center">
-            <section className='bg-white shadow-xl h-auto mx-10 px-6 py-6 w-96'>
+            <section className='bg-white shadow-xl h-auto mx-10 px-6 py-6 min-w-[384px] max-w-[384px]'>
               <p className="text-5xl font-bold text-pink-500">
                 <span className='text-sm'>USD$</span> 15
               </p>
@@ -99,11 +100,15 @@ export default function Pricing () {
               </section>
               <CTAButton className='mt-6 w-10/12'>
                 <span>
-                  <span className='inline'>Start Trial</span> <ArrowRightIcon className='w-4 inline'></ArrowRightIcon>
+                  <Link href='/login'>
+                    <a>
+                        <span className='inline'>Start Trial</span> <ArrowRightIcon className='w-4 inline'></ArrowRightIcon>                  
+                    </a>
+                  </Link>
                 </span>
               </CTAButton>
             </section>
-            <section className='bg-emerald-500 shadow-xl h-auto mx-10 px-6 py-6 w-96'>
+            <section className='bg-emerald-500 shadow-xl h-auto mx-10 px-6 py-6 min-w-[384px] max-w-[384px]'>
               <p className="text-5xl font-bold text-white">
                 <span className='text-sm'>USD$</span> 30
               </p>
@@ -202,11 +207,15 @@ export default function Pricing () {
               </section>
               <CTAButton className='border-none mt-6 w-10/12'>
                 <span>
-                  <span className='inline'>Start Trial</span> <ArrowRightIcon className='w-4 inline'></ArrowRightIcon>
+                  <Link href='/login'>
+                    <a>
+                        <span className='inline'>Start Trial</span> <ArrowRightIcon className='w-4 inline'></ArrowRightIcon>                  
+                    </a>
+                  </Link>
                 </span>
               </CTAButton>
             </section>
-            <section className='bg-white shadow-xl h-auto mx-10 px-6 py-6 w-96'>
+            <section className='bg-white shadow-xl h-auto mx-10 px-6 py-6 min-w-[384px] max-w-[384px]'>
               <p className="text-5xl font-bold text-pink-500">
                 <span className='text-sm'>USD$</span> 100
               </p>
@@ -318,7 +327,11 @@ export default function Pricing () {
               </section>
               <CTAButton className='mt-6 w-10/12'>
                 <span>
-                  <span className='inline'>Start Trial</span> <ArrowRightIcon className='w-4 inline'></ArrowRightIcon>
+                  <Link href='/login'>
+                    <a>
+                        <span className='inline'>Start Trial</span> <ArrowRightIcon className='w-4 inline'></ArrowRightIcon>                  
+                    </a>
+                  </Link>
                 </span>
               </CTAButton>
             </section>

@@ -21,9 +21,12 @@ export function MarketingHeader (props: { active?: string }) {
             <NavButton href='/pricing' active={props.active === 'pricing'}>
               Pricing
             </NavButton>
-            <CTAButton>
-              Login
-            </CTAButton>
+            <Link href='/login'>
+              <CTAButton className='w-20'>
+                Login
+              </CTAButton>
+            </Link>
+            
           </div>
       </header>
     )
