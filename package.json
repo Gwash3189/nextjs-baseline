@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint actions/**/*.ts pages/**/*.ts pages/**/*.tsx  repositories/**/*.ts components/**/*.tsx domains/**/*.ts",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "next lint && eslint actions/**/*.ts pages/**/*.ts pages/**/*.tsx  repositories/**/*.ts components/**/*.tsx domains/**/*.ts",
+    "lint:fix": "npm run lint -- --fix && next lint --fix",
     "get:started": "npm install && prisma init",
     "test": "jest tests/*.spec.*",
     "test:watch": "npm run test -- --watch"
