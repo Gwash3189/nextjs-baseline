@@ -2,6 +2,13 @@ import React from 'react'
 import Chrome from 'components/Chrome'
 import { Health } from '@prisma/client'
 import useSWR from 'swr'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+
+TimeAgo.addDefaultLocale(en)
+
+// Create formatter (English).
+const timeAgo = new TimeAgo('en-US')
 
 // const supabase = getClient()
 const fetcher = (url: string, opts = {}) => fetch(url, opts).then((res) => res.ok ? res.json() : Promise.reject(res))
@@ -19,7 +26,6 @@ function StatusIndicator (service: { status: boolean }) {
 
 export default function Home () {
   const { data = [] } = useSWR<Partial<Health>[]>('/api/services', fetcher)
-  console.log(data)
 
   return (
     <Chrome header='Dashboard' current='health checks'>
@@ -49,17 +55,17 @@ export default function Home () {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {data.map((service) => (
-                    <tr key={service.serviceName}>
+                    <tr key={service.name}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-start">
-                          <div className="">
-                            <div className="text-sm font-medium text-gray-900">{service.serviceName}</div>
-                            <div className="text-sm text-gray-500">{new Date(service.updatedAt || Date.now()).toTimeString()}</div>
+                          <div>
+                            <div className="text-sm font-medium text-gray-900">{service.name}</div>
+                            <div className="text-sm text-gray-500">{timeAgo.format(new Date(service.updatedAt || Date.now()))}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <StatusIndicator status={service.toggle || false} />
+                        <StatusIndicator status={service.status || false} />
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
