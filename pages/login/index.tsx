@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { getClient } from 'domains/supabase'
+import CTAButton from 'components/buttons/CTAButton'
 
 const supabase = getClient()
 
@@ -18,6 +19,8 @@ function signInWithGithub (e: any) {
   e.preventDefault()
   supabase.auth.signIn({
     provider: 'github'
+  }, {
+    redirectTo: 'http://localhost:3000/app'
   })
 }
 
@@ -29,11 +32,11 @@ export default function Login () {
           <div className='text-center'>
             <h1 className='mx-auto h-12 w-auto text-6xl font-bold'>🦩</h1>
           </div>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>Sign in to your Github account</h2>
+          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>Sign in</h2>
           <p className='mt-2 text-center text-sm text-gray-600'>
               Or{' '}
             <Link href='/'>
-              <a className='font-medium text-indigo-600 hover:text-indigo-500'>
+              <a className='focus:outline-none focus:ring-pink-700 focus:ring-2 font-medium text-pink-600 hover:text-pink-500'>
                 start your 14-day free trial
               </a>
             </Link>
@@ -41,16 +44,16 @@ export default function Login () {
         </div>
         <form className='mt-8 space-y-6'>
           <div>
-            <button
+            <CTAButton
               type='submit'
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              className='group relative w-full flex justify-center py-2 px-4'
               onClick={signInWithGithub}
             >
               <span>
                 <GithubIcon className='h-5 w-5 absolute left-4 top-2 fill-white' />
               </span>
                 Sign in with Github
-            </button>
+            </CTAButton>
           </div>
         </form>
       </div>

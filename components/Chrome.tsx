@@ -16,7 +16,7 @@ type navigationItem = {
     current?: boolean
 }
 const navigationItems = [
-  { name: 'Dashboard', href: '/' }
+  { name: 'Health Checks', href: '/app/' }
 ]
 
 const userNavigation = [
@@ -47,18 +47,14 @@ export default function Chrome (props: HomeProps) {
   return (
     <>
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-teal-50 border-b">
           {({ open }) => (
             <>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                        alt="Workflow"
-                      />
+                      <p className="text-4xl">🦩</p>
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -71,8 +67,8 @@ export default function Chrome (props: HomeProps) {
                             <a
                               className={classNames(
                                 item.current
-                                  ? 'bg-gray-900 text-white'
-                                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                  ? 'focus:rounded-lg focus:outline-none focus:ring-pink-700 focus:ring-2 focus:ring-offset-2 font-semibold text-md text-pink-500 hover:text-pink-500 transition-all hover:border-pink-200 hover:underline'
+                                  : 'focus:rounded-lg focus:outline-none focus:ring-pink-500 focus:ring-2 focus:ring-offset-2 font-semibold text-md text-pink-400 hover:text-pink-500 transition-all hover:border-pink-200 hover:underline',
                                 'px-3 py-2 rounded-md text-sm font-medium'
                               )}
                               aria-current={item.current ? 'page' : undefined}
@@ -88,7 +84,7 @@ export default function Chrome (props: HomeProps) {
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
-                        className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                        className="bg-green-200 p-1 rounded-full text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
                       >
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -97,7 +93,7 @@ export default function Chrome (props: HomeProps) {
                       {/* Profile dropdown */}
                       <Menu as="div" className="ml-3 relative">
                         <div>
-                          <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                          <Menu.Button className="max-w-xs bg-gray-700 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
                             <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
                           </Menu.Button>
@@ -135,7 +131,7 @@ export default function Chrome (props: HomeProps) {
                   </div>
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
-                    <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open main menu</span>
                       {open
                         ? (

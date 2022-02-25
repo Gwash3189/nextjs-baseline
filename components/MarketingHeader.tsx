@@ -8,7 +8,7 @@ export function MarketingHeader (props: { active?: string }) {
     <header className='w-full pt-6 flex flex-row'>
       <div className='flex grow flex-col text-transparent hover:text-gray-300'>
         <Link href='/'>
-          <a className=''>
+          <a>
             <h1 className='text-6xl font-bold -ml-6 text-black'>🦩</h1>
             <span className='transition-all opacity-30'>Yeah yeah yeah</span>
           </a>
@@ -22,9 +22,11 @@ export function MarketingHeader (props: { active?: string }) {
             Pricing
         </NavButton>
         <Link href='/login'>
-          <CTAButton className='w-20'>
-              Login
-          </CTAButton>
+          <a tabIndex={-1}>
+            <CTAButton className='w-20'>
+                Login
+            </CTAButton>
+          </a>
         </Link>
 
       </div>
