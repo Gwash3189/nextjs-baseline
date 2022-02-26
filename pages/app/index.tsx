@@ -1,31 +1,15 @@
 import React from 'react'
-import Chrome from 'components/Chrome'
-import { Health } from '@prisma/client'
+import { Service } from '@prisma/client'
 import useSWR from 'swr'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
 
-TimeAgo.addDefaultLocale(en)
+import Chrome from 'components/marketing/MarketingChrome'
+import TableBody from 'components/app/service-table/TableBody'
 
-// Create formatter (English).
-const timeAgo = new TimeAgo('en-US')
-
-// const supabase = getClient()
 const fetcher = (url: string, opts = {}) => fetch(url, opts).then((res) => res.ok ? res.json() : Promise.reject(res))
-// let services: Partial<Health>[] = []
-
-function StatusIndicator (service: { status: boolean }) {
-  const styles = service.status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-  const statusText = service.status ? 'Healthy' : 'Down'
-  return (
-    <span className={'px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' + styles}>
-      {statusText}
-    </span>
-  )
-}
 
 export default function Home () {
-  const { data = [] } = useSWR<Partial<Health>[]>('/api/services', fetcher)
+  const { data = [], error } = useSWR<Service[]>('/api/services', fetcher)
+  const isLoading = !error && !data
 
   return (
     <Chrome header='Dashboard' current='health checks'>
@@ -49,32 +33,11 @@ export default function Home () {
                     Status
                     </th>
                     <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
+                      <span className="sr-only">Refresh</span>
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {data.map((service) => (
-                    <tr key={service.name}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-start">
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">{service.name}</div>
-                            <div className="text-sm text-gray-500">{timeAgo.format(new Date(service.updatedAt || Date.now()))}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <StatusIndicator status={service.status || false} />
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Refresh
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                <TableBody services={data} isLoading={isLoading} />
               </table>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { MarketingContainer } from 'components/MarketingContainer'
+import { MarketingContainer } from 'components/marketing/MarketingContainer'
 import Link from 'next/link'
 import React from 'react'
 

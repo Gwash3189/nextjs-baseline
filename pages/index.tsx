@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { MarketingContainer } from 'components/MarketingContainer'
-import { MarketingHeader } from 'components/MarketingHeader'
+import { MarketingContainer } from 'components/marketing/MarketingContainer'
+import { MarketingHeader } from 'components/marketing/MarketingHeader'
 
 export default function Main () {
   return (

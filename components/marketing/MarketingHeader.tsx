@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import NavButton from './buttons/NavButton'
+import NavButton from '../buttons/NavButton'
 import CTAButton from 'components/buttons/CTAButton'
 
 export function MarketingHeader (props: { active?: string }) {

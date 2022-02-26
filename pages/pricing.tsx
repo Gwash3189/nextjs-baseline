@@ -1,6 +1,6 @@
 import React from 'react'
-import { MarketingContainer } from 'components/MarketingContainer'
-import { MarketingHeader } from 'components/MarketingHeader'
+import { MarketingContainer } from 'components/marketing/MarketingContainer'
+import { MarketingHeader } from 'components/marketing/MarketingHeader'
 import LowestPaymentPlan from 'components/pricing/LowestPaymentPlan'
 import HighlightedPaymentPlan from 'components/pricing/HighlightedPaymentPlan'
 import HighestPaymentPlan from 'components/pricing/HighestPaymentPlan'

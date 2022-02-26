@@ -1,18 +1,18 @@
-import { Health, Prisma, PrismaClient } from '.prisma/client'
+import { Service, Prisma, PrismaClient } from '.prisma/client'
 import { BaseRespository } from 'repositories/base'
 
-export type CreateHealthRecord = {
+export type CreateServiceRecord = {
     status: boolean,
     url: string,
     name: string
 }
 
-export class HealthRespository extends BaseRespository<Prisma.HealthDelegate<any>, Health> {
+export class ServiceRespository extends BaseRespository<Prisma.ServiceDelegate<any>, Service> {
   getDataType (client: PrismaClient) {
-    return client.health
+    return client.service
   }
 
-  async create ({ status, url, name }: CreateHealthRecord) {
+  async create ({ status, url, name }: CreateServiceRecord) {
     return await this.querySingle(async (author) => {
       return await author.create({
         data: {

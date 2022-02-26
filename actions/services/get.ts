@@ -1,11 +1,12 @@
-import { Health } from '@prisma/client'
+import { Service } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { HealthRespository } from 'repositories/health'
+import { ServiceRespository } from 'repositories/service'
 
-export function get (healthRespository = new HealthRespository()) {
+export function get (serviceRespository = new ServiceRespository()) {
   return async function handler (req: NextApiRequest, res: NextApiResponse) {
-    const health: Array<Health | null> = await healthRespository.all()
-
-    return res.status(200).json(health)
+    console.log('getting service records')
+    const service: Array<Service | null> = await serviceRespository.all()
+    console.log('returning service records')
+    return res.status(200).json(service)
   }
 }
