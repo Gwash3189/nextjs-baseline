@@ -2,13 +2,8 @@ import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-}
+import { useCurrentUser } from 'hooks/useCurrentUser'
+import NavButton from 'components/buttons/NavButton'
 
 type navigationItem = {
     name: string,
@@ -44,6 +39,8 @@ function labelCurrentNavigationItem (navigationItems: Array<navigationItem>, cur
 }
 
 export default function Chrome (props: HomeProps) {
+  const { user } = useCurrentUser()
+
   return (
     <>
       <div className="min-h-full">
@@ -58,25 +55,13 @@ export default function Chrome (props: HomeProps) {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {labelCurrentNavigationItem(navigationItems, props.current).map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            <a
-                              className={classNames(
-                                item.current
-                                  ? 'focus:rounded-lg focus:outline-none focus:ring-pink-700 focus:ring-2 focus:ring-offset-2 font-semibold text-md text-pink-500 hover:text-pink-500 transition-all hover:border-pink-200 hover:underline'
-                                  : 'focus:rounded-lg focus:outline-none focus:ring-pink-500 focus:ring-2 focus:ring-offset-2 font-semibold text-md text-pink-400 hover:text-pink-500 transition-all hover:border-pink-200 hover:underline',
-                                'px-3 py-2 rounded-md text-sm font-medium'
-                              )}
-                              aria-current={item.current ? 'page' : undefined}
-                            >
+                        {labelCurrentNavigationItem(navigationItems, props.current).map((item) => {
+                          return (
+                            <NavButton key={item.name} href={item.href} active={!!item.current} className='w-28'>
                               {item.name}
-                            </a>
-                          </Link>
-                        ))}
+                            </NavButton>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -95,7 +80,7 @@ export default function Chrome (props: HomeProps) {
                         <div>
                           <Menu.Button className="max-w-xs bg-gray-700 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                            <img className="h-8 w-8 rounded-full" src={user?.user_metadata.avatar_url} alt="" />
                           </Menu.Button>
                         </div>
                         <Transition
@@ -165,11 +150,11 @@ export default function Chrome (props: HomeProps) {
                 <div className="pt-4 pb-3 border-t border-gray-700">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                      <img className="h-10 w-10 rounded-full" src={user?.user_metadata.avatar_url} alt="" />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                      <div className="text-base font-medium leading-none text-white">{user?.user_metadata.full_name}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
                     </div>
                     <button
                       type="button"

@@ -1,5 +1,11 @@
-const currentUser: any = null
+import { getClient } from 'domains/supabase'
 
-export const getCurrentUser = () => {
-  return currentUser
+const supabase = getClient()
+
+export const getCurrentUser = (req?: any) => {
+  if (window) {
+    return supabase.auth.user()
+  } else {
+    supabase.auth.api.getUserByCookie(req)
+  }
 }

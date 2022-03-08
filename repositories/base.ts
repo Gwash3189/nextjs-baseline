@@ -1,8 +1,8 @@
-import { Repository } from 'nextjs-backend-helpers'
-import { getClient } from 'repositories/connect'
+import { PrismaClient } from '@prisma/client'
+import { BaseRespository as Base } from 'nextjs-backend-helpers'
 
-export abstract class BaseRespository<T, X> extends Repository<T, X> {
-  getClient () {
-    return getClient()
+export abstract class BaseRespository<T, X> extends Base<T, X> {
+  createClient() {
+    return new PrismaClient()
   }
 }

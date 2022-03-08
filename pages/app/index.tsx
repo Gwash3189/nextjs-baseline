@@ -2,7 +2,7 @@ import React from 'react'
 import { Service } from '@prisma/client'
 import useSWR from 'swr'
 
-import Chrome from 'components/marketing/MarketingChrome'
+import MarketingChrome from 'components/marketing/MarketingChrome'
 import TableBody from 'components/app/service-table/TableBody'
 
 const fetcher = (url: string, opts = {}) => fetch(url, opts).then((res) => res.ok ? res.json() : Promise.reject(res))
@@ -12,7 +12,7 @@ export default function Home () {
   const isLoading = !error && !data
 
   return (
-    <Chrome header='Dashboard' current='health checks'>
+    <MarketingChrome header='Dashboard' current='health checks'>
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -43,6 +43,6 @@ export default function Home () {
           </div>
         </div>
       </div>
-    </Chrome>
+    </MarketingChrome>
   )
 }

@@ -3,6 +3,10 @@ import React from 'react'
 import NavButton from '../buttons/NavButton'
 import CTAButton from 'components/buttons/CTAButton'
 
+function isActive (name: string, props: { active?: string }) {
+  return props.active === name
+}
+
 export function MarketingHeader (props: { active?: string }) {
   return (
     <header className='w-full pt-6 flex flex-row'>
@@ -15,10 +19,10 @@ export function MarketingHeader (props: { active?: string }) {
         </Link>
       </div>
       <div className='flex-none flex justify-center items-center'>
-        <NavButton href='/404' active={props.active === 'docs'}>
+        <NavButton href='/404' active={isActive('docs', props)}>
             Docs
         </NavButton>
-        <NavButton href='/pricing' active={props.active === 'pricing'}>
+        <NavButton href='/pricing' active={isActive('pricing', props)}>
             Pricing
         </NavButton>
         <Link href='/login'>
