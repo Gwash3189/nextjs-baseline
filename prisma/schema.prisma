@@ -33,7 +33,7 @@ model Identity {
   expires DateTime
   otp String?
   user User @relation(fields: [userId], references: [id])
-  userId String @db.Uuid()
+  userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 }
