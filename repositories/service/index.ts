@@ -13,8 +13,8 @@ export class ServiceRespository extends BaseRespository<Prisma.ServiceDelegate<a
   }
 
   async create ({ status, url, name }: CreateServiceRecord) {
-    return await this.querySingle(async (author) => {
-      return await author.create({
+    return await this.querySingle(async (service) => {
+      return await service.create({
         data: {
           status,
           name,

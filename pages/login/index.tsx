@@ -1,9 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { getClient } from 'domains/supabase'
 import CTAButton from 'components/buttons/CTAButton'
-
-const supabase = getClient()
 
 function GithubIcon (props: {[key:string]: any}) {
   return (
@@ -15,13 +12,8 @@ function GithubIcon (props: {[key:string]: any}) {
   )
 }
 
-function signInWithGithub (e: any) {
+function signIn (e: any) {
   e.preventDefault()
-  supabase.auth.signIn({
-    provider: 'github'
-  }, {
-    redirectTo: 'http://localhost:3000/app'
-  })
 }
 
 export default function Login () {
@@ -37,22 +29,25 @@ export default function Login () {
               Or{' '}
             <Link href='/'>
               <a className='focus:outline-none focus:ring-pink-700 focus:ring-2 font-medium text-pink-600 hover:text-pink-500'>
-                start your 14-day free trial
+                register for a 14-day trial
               </a>
             </Link>
           </p>
         </div>
-        <form className='mt-8 space-y-6'>
+        <form className=''>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='username'>
+            Email
+          </label>
+          <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' type='text' placeholder='Email'/>
+        </div>
           <div>
             <CTAButton
               type='submit'
-              className='group relative w-full flex justify-center py-2 px-4'
-              onClick={signInWithGithub}
+              className='group ml-0 relative w-full flex justify-center'
+              onClick={signIn}
             >
-              <span>
-                <GithubIcon className='h-5 w-5 absolute left-4 top-2 fill-white' />
-              </span>
-                Sign in with Github
+              Login
             </CTAButton>
           </div>
         </form>
