@@ -4,6 +4,9 @@ const remote = (url: string, options: RequestInit) => {
       'Content-Type': 'application/json'
     },
     body: options.body ? JSON.stringify(options.body) : null
+  }).then(res => res.status >= 400 ? res : Promise.reject(res)).then(res => {
+    debugger
+    return res
   })
 }
 

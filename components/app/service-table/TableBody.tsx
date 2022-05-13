@@ -10,7 +10,7 @@ type Props = {
   isLoading: Boolean
 }
 
-export default function TableBody (props: Props) {
+export function TableBody (props: Props) {
   if (!props.isLoading) {
     return (
       <tbody className="bg-white divide-y divide-gray-200">

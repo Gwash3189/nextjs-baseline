@@ -1,10 +1,11 @@
 import { User, Prisma, PrismaClient } from '.prisma/client'
+import { Facade, repository } from 'nextjs-backend-helpers'
 import { BaseRespository } from 'repositories/base'
-import { getExpiryTime } from 'domains/identity'
 
 export type CreateServiceRecord = Prisma.UserCreateInput
 
-export class UserRepository extends BaseRespository<Prisma.UserDelegate<any>, User> {
+@repository()
+class UserRepositoryImplementation extends BaseRespository<Prisma.UserDelegate<any>, User> {
   getDataType (client: PrismaClient) {
     return client.user
   }
@@ -40,6 +41,8 @@ export class UserRepository extends BaseRespository<Prisma.UserDelegate<any>, Us
           name
         }
       })
-    }) as User
+    })
   }
 }
+
+export const UserRepository = Facade.create(UserRepositoryImplementation)

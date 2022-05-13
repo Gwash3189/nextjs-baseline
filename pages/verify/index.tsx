@@ -5,22 +5,15 @@ import React, { useEffect, useState } from 'react'
 
 export default function Login () {
   const { query, push } = useRouter()
-  const [error, setError] = useState()
+  const [error, setError] = useState('')
 
   useEffect(() => {
     if (query.otp) {
       get(`/api/auth/verify?otp=${query.otp}`)
-        .then(async (res) => {
-          const value = await res.json()
-
-          if (res.status === 200) {
-            push('/app')
-          } else {
-            return Promise.reject(value)
-          }
-        })
+        .then(async () => push('/app'))
         .catch((x) => {
-          setError(x.errors[0])
+          // debugger
+          setError('Something went wrong verifying your account')
         })
     }
   }, [query])

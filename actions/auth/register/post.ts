@@ -4,6 +4,7 @@ import { getBody } from "nextjs-backend-helpers"
 import { IdentityRespository } from "repositories/identity"
 import { UserRepository } from "repositories/user"
 import * as yup from 'yup'
+import { sendNewUserEmail } from "domains/email"
 
 type registration = Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'verified'>
 const schema = yup.object().shape({
@@ -29,7 +30,7 @@ export function post (userRepository: UserRepository = new UserRepository(), ide
     const user = await userRepository.findByEmail(userRegistration)
 
     if (user) {
-      console.log('user already existed')
+      console.log('user already exists')
       return res.status(400).json({
         path: '',
         errors: ['user already exists']
@@ -42,9 +43,10 @@ export function post (userRepository: UserRepository = new UserRepository(), ide
       })
       const identity = await identityRepository.create({ user: newUser })
       console.log('identity created')
-      res.json({
-        url: `/verify?otp=${identity.otp}`
-      })
+      const url = `/api/auth/verify?otp=${identity.otp}`
+      await sendNewUserEmail(newUser, url)
+      console.log('email sent')
+      return res.redirect('/')
     }
   }
 }

@@ -38,6 +38,8 @@ function labelCurrentNavigationItem (navigationItems: Array<navigationItem>, cur
 }
 
 export default function Chrome (props: HomeProps) {
+  // const x = useCurrentUser()
+  // console.log('current user: ', x)
   return (
     <>
       <div className="min-h-full">

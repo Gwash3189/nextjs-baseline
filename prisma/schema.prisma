@@ -23,6 +23,7 @@ model User {
   id String @id @default(uuid())
   name String @db.VarChar(255)
   email String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
   verified Boolean @default(false)
   identity Identity?
   createdAt DateTime @default(now())

@@ -1,18 +1,22 @@
-import { useRouter } from "next/router"
+import { isUserAuthenticated } from 'domains/authentication'
+import { getStaticPropsUser, StaticPropsUser } from 'domains/user'
+import { NextPageContext } from 'next'
 
-type Props = {
-  authenticated: boolean,
-  children: JSX.Element
+export type ProtectedPageProps = {
+  authenticated: boolean
+  user: StaticPropsUser
 }
 
-export const Protected = (props: Props) => {
-  const result = props.authenticated ? props.children : null
-  const router = useRouter()
+export async function pageIsProtected (context: NextPageContext) {
+  let user: null | StaticPropsUser = null
+  const [result, jwt] = await isUserAuthenticated(context)
 
-  if(!result) {
-    router.push('/')
-    return (<></>)
+  if (jwt !== null) {
+    user = await getStaticPropsUser({ id: jwt.user.id })
   }
 
-  return props.children
+  return {
+    authenticated: result,
+    user
+  }
 }

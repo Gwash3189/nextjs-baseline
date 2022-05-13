@@ -10,7 +10,7 @@ export default function Main () {
       <div className="h-screen flex items-center">
         <section className='w-screen md:w-9/12 xl:w-8/12'>
           <span className="font-bold uppercase tracking-widest">Rapidly build modern sass</span>
-          <h1 className="text-3xl lg:text-5xl font-bold text-pink-500">
+          <h1 className="leading-none uppercase text-5xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-pink-600 to-purple-400">
               Birds<br/>Nest
           </h1>
           <p className="font-bold mb-1">The building blocks of your next sass</p>

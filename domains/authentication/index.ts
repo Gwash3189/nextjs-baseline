@@ -80,7 +80,6 @@ export const isUserAuthenticated = async (context: NextPageContext): Promise<[bo
   }
 
   const jwt = await decodeJwt(result['bigbird-authentication'])
-  console.log('jwt: ', !!jwt)
   if (await !isTokenExpired(jwt.expiry)) {
     console.log('token is not expired')
     if (await isUserVerified({ id: jwt.user.id })) {
