@@ -1,6 +1,7 @@
-import { Identity, User, Prisma, PrismaClient } from '.prisma/client'
+import { Identity, User, Prisma, PrismaClient } from '@prisma/client'
 import { getExpiryTime } from 'domains/authentication'
 import { createOtp } from 'domains/identity'
+import { Facade } from 'nextjs-backend-helpers'
 import { BaseRespository } from 'repositories/base'
 
 export type CreateIdentityRecord = {
@@ -10,6 +11,14 @@ export type CreateIdentityRecord = {
 }
 
 export class IdentityRespository extends BaseRespository<Prisma.IdentityDelegate<any>, Identity> {
+  mock(method: string, imple: () => any) {
+    Facade.mock(method, imple)
+  }
+
+  reset(method: string) {
+    Facade.reset(method)
+  }
+
   getDataType (client: PrismaClient) {
     return client.identity
   }

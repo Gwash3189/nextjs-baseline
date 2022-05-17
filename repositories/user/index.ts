@@ -1,18 +1,26 @@
-import { User, Prisma, PrismaClient } from '.prisma/client'
-import { Facade, repository } from 'nextjs-backend-helpers'
+import { User, Prisma, PrismaClient } from '@prisma/client'
+import { Facade } from 'nextjs-backend-helpers'
 import { BaseRespository } from 'repositories/base'
+import { string } from 'yup'
 
 export type CreateServiceRecord = Prisma.UserCreateInput
 
-@repository()
-class UserRepositoryImplementation extends BaseRespository<Prisma.UserDelegate<any>, User> {
+export class UserRepository extends BaseRespository<Prisma.UserDelegate<any>, User> {
+  mock(method: string, imple: () => any) {
+    Facade.mock(method, imple)
+  }
+
+  reset(method: string) {
+    Facade.reset(method)
+  }
+
   getDataType (client: PrismaClient) {
     return client.user
   }
 
   async verifyUser({ id }: { id: string }) {
     return await this.querySingle(async (user) => {
-      return await user.update({
+      return await user.({
         where: {
           id,
         },
@@ -44,5 +52,3 @@ class UserRepositoryImplementation extends BaseRespository<Prisma.UserDelegate<a
     })
   }
 }
-
-export const UserRepository = Facade.create(UserRepositoryImplementation)

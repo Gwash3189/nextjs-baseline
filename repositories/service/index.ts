@@ -1,7 +1,7 @@
 import 'reflect-metadata'
-import { Service, Prisma, PrismaClient } from '.prisma/client'
+import { Service, Prisma, PrismaClient } from '@prisma/client'
 import { BaseRespository } from 'repositories/base'
-import { Facade, repository, Logger } from 'nextjs-backend-helpers'
+import { repository } from 'nextjs-backend-helpers'
 
 export type CreateServiceRecord = {
     status: boolean,
@@ -10,8 +10,8 @@ export type CreateServiceRecord = {
 }
 
 @repository()
-class Implementation extends BaseRespository<Prisma.ServiceDelegate<any>, Service> {
-  getDataType (client: PrismaClient) {
+export class ServiceRepository extends BaseRespository<Prisma.ServiceDelegate<any>, Service> {
+  getDataType(client: PrismaClient) {
     return client.service
   }
 
@@ -27,5 +27,3 @@ class Implementation extends BaseRespository<Prisma.ServiceDelegate<any>, Servic
     })
   }
 }
-
-export const ServiceRepository = Facade.create(Implementation)

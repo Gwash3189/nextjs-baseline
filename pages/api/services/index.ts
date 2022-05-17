@@ -1,4 +1,4 @@
-import { Controller, controller, install } from 'nextjs-backend-helpers'
+import { Controller, install } from 'nextjs-backend-helpers'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { ServiceRepository } from 'repositories/service'
 import { Service } from '@prisma/client'
